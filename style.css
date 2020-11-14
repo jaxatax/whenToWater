@@ -1,0 +1,60 @@
+body {
+    background-color: deepskyblue;
+}
+
+h1 {
+	text-align: center;
+	color: #90ff00;
+	font-size: 55px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+input {
+	transition: width 0.4s, font-size 0.4s;
+	width: 230px;
+	text-align: center;
+	font-size: 18px;
+}
+
+input:hover {
+	width: 285px;
+	font-size: 25px;
+}
+
+button {
+	transition: width 0.4s, height 0.4s, background-color 0.4s, font-size 0.4s;
+	width: 200px;
+	height: 100px;
+	background-color: #90ff00;
+	font-size: 18px;
+	font-family: 'Open Sans', sans-serif;
+	color: #5555ff;
+}
+
+button:hover {
+	width: 230px;
+	height: 116px;
+	background-color: #00ee00;
+	font-size: 24px;
+}
+
+.centerMe {
+	text-align: center;
+}
+
+.info {
+	text-align: center;
+	color: #90ff00;
+	font-size: 25px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#submitButtonDiv {
+	text-align: center;
+}
+
+#phoneMsg {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	color: #ff0000;
+}
