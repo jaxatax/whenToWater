@@ -19,10 +19,12 @@
         return (date("H:i") == "02:59");
     }
 
+    // returns the weather data
     function getWeather() {
         return file_get_contents($weatherURL);
     }
 
+    // returns true or false based on if watering is needed or not
     function checkIfWateringNeeded($weatherData) {
         for ($i = 0; $i < 8; $i++) {
             if ($weatherData->rain) {
@@ -36,13 +38,13 @@
         }
     }
 
-
+    // checks every 60 seconds if it's the correct time to check the weather and text the users
     while (true) {
         if (checkIfCorrectTime()) {
             if (checkIfWateringNeeded(getWeather())) {
-                textUsers("Water!");
+                textUsers("Water your garden.");
             } else {
-                textUsers("Don't water!");
+                textUsers("Don't water your garden.");
             }
         }
         sleep(60);
