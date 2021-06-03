@@ -16,11 +16,10 @@
 		<br>
 		<br>
 		<div class="centerMe">
-			<input id="phoneNumber" type="text" placeholder="Enter phone number"/>
 			<p id="phoneMsg"></p>
 			<br>
 			<br>
-			<button onclick="checkPhoneNumber()">Submit Number</button>
+			<button onclick="window.location='signup.html';">Sign Up</button>
 			<br>
 			<br>
 			<br>
@@ -30,7 +29,14 @@
 		</div>
 		
 		<script>
+      // sets the time on the webpage initially
+      changeTime();
+      // changes the time on the webpage every second
+      window.setInterval(changeTime, 1000);
+      // sets the weather on the webpage initially
 			getWeather();
+      // changes the weather on the webpage every minute
+      window.setInterval(getWeather, 60000);
 		</script>
 	</body>
 </html>
