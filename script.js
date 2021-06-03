@@ -21,12 +21,12 @@ function changeTime() {
     } else {
         minutes = currentDate.getMinutes().toString();
     }
-    if (currentDate.getHours() == 0) {
-        currentTime = "12:" + minutes;
-    } else if (currentDate.getHours() > 12) {
-        currentTime = (currentDate.getHours() - 12) + ":" + minutes;
+    if (currentDate.getHours() > 12) {
+        currentTime = (currentDate.getHours() - 12).toString() + ":" + minutes + "pm";
+    } else if (currentDate.getHours() == 0) {
+        currentTime = "12:" + minutes + "am";
     } else {
-        currentTime = currentDate.getHours().toString() + ":" + minutes;
+        currentTime = currentDate.getHours().toString() + ":" + minutes + "am";
     }
     document.getElementById("date").innerHTML = "It's " + currentTime + " on " + daysOfTheWeek[currentDate.getDay()] + ", " + monthsOfTheYear[currentDate.getMonth()] + " " + currentDate.getDate().toString() + ", " + currentDate.getFullYear().toString() + ".";
 }
@@ -39,65 +39,73 @@ async function getWeather() {
 	console.log(currentWeather);
 }
 
-window.setInterval(changeTime, 1000); // changes the time on the webpage every second
-window.setInterval(getWeather, 60000); // changes the weather on the webpage every minute
+// function to check if the form data is valid
+function checkFormData() {
+  var correct = true;
 
+  var phoneError = document.getElementById("phoneMsg");
 
-// function to check if the phone number is valid
-function checkPhoneNumber() {
-    console.log("I am in here!!!!!");
-    var phonenumEle = 
-        document.getElementById("phoneNumber");
-
-    if(phonenumEle){					
-        var phonenumValue = phonenumEle.value;
-
-        var phonenumCleaned = phonenumValue.replace(/\D/g, "");
-
-        var phonenumMatch = phonenumValue.match(/\d/g);
-
-        if (phonenumMatch) {
-            if(phonenumMatch.length===10){
-                var pEle = document.getElementById("phoneMsg");
-
-                var firstPart = phonenumCleaned.substr(0, 3);
-                var secondPart = phonenumCleaned.substr(3, 3);
-                var thirdPart = phonenumCleaned.substr(6, 4);
-
-                var newNum = firstPart + secondPart + thirdPart;
-
-
-                if (pEle) { 
-                    pEle.innerHTML = "";
-                    pEle.classList.remove("invalid");
-
-                }	
-                phoneNumberArray.push(newNum);
-                phonenumEle.value = "";
-                return true;
-            }
-            else {
-                var pEle = document.getElementById("phoneMsg");
-                if (pEle) { 
-                    pEle.innerHTML = "Invalid phone number!";
-                    alert("Invalid phone number!");
-                    pEle.classList.remove("valid");
-                    pEle.classList.add("invalid");
-                }
-
-                return false;
-            }
+  // check phone number and get rid of extra characters
+  var phonenumEle = document.getElementById("phoneNumber");
+  if(phonenumEle){					
+    var phonenumValue = phonenumEle.value;
+    var phonenumCleaned = phonenumValue.replace(/\D/g, "");
+    var phonenumMatch = phonenumValue.match(/\d/g);
+    if (phonenumMatch) {
+      if(phonenumMatch.length===10) {
+        var firstPart = phonenumCleaned.substr(0, 3);
+        var secondPart = phonenumCleaned.substr(3, 3);
+        var thirdPart = phonenumCleaned.substr(6, 4);
+        var newNum = firstPart + secondPart + thirdPart;
+        if (phoneError) { 
+          phoneError.innerHTML = "";
+          phoneError.classList.remove("invalid");
+        }	
+        phoneNumberArray.push(newNum);
+      } else {
+        var phoneError = document.getElementById("phoneMsg");
+        if (phoneError) { 
+          phoneError.innerHTML = "Invalid phone number!";
+          // alert("Invalid phone number!");
+          phoneError.classList.remove("valid");
+          phoneError.classList.add("invalid");
+          correct = false;
         }
-        else {
-            var pEle = document.getElementById("phoneMsg");
-            if (pEle) { 
-                pEle.innerHTML = "Invalid phone number!";
-                alert("Invalid phone number!");
-                pEle.classList.remove("valid");
-                pEle.classList.add("invalid");
-            }
-
-            return false;
-        }
+      }
     }
+    else {
+      var phoneError = document.getElementById("phoneMsg");
+      if (phoneError) { 
+        phoneError.innerHTML = "Invalid phone number!";
+        // alert("Invalid phone number!");
+        phoneError.classList.remove("valid");
+        phoneError.classList.add("invalid");
+        correct = false;
+      }
+    }
+  }
+
+  // check zip code entered
+  var zip = document.getElementById("zipCode");
+  var zipError = document.getElementById("zipMsg");
+  if (!/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip.value)) {
+    zipError.innerHTML = "Invalid zip code!";
+    // alert("Invalid zip code!");
+    correct = false;
+  } else {
+    zipError.innerHTML = "";
+  }
+
+  // check time entered
+  var time = document.getElementById("textTime");
+  var timeError = document.getElementById("timeMsg");
+  if (time.value == "") {
+    timeError.innerHTML = "Please select a time!";
+    correct = false;
+  }
+
+  if (correct) {
+    // send data to server and redirect user
+    window.location = "index.html";
+  }
 }

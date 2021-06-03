@@ -9,6 +9,12 @@ h1 {
 	font-family: 'Open Sans', sans-serif;
 }
 
+p {
+  font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+  color: #90ff00;
+}
+
 input {
 	transition: width 0.4s, font-size 0.4s;
 	width: 230px;
@@ -49,13 +55,10 @@ button:hover {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.error {
+	color: #ff0000;
+}
 
 #submitButtonDiv {
 	text-align: center;
-}
-
-#phoneMsg {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 18px;
-	color: #ff0000;
 }

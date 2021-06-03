@@ -6,6 +6,7 @@
 		<title>When to Water?</title>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twilio.js/1.2.0/twilio.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</head>
 	<body>
@@ -15,11 +16,10 @@
 		<br>
 		<br>
 		<div class="centerMe">
-			<input id="phoneNumber" type="text" placeholder="Enter phone number"/>
 			<p id="phoneMsg"></p>
 			<br>
 			<br>
-			<button onclick="checkPhoneNumber()">Submit Number</button>
+			<button onclick="window.location='signup.html';">Sign Up</button>
 			<br>
 			<br>
 			<br>
@@ -29,8 +29,14 @@
 		</div>
 		
 		<script>
-			changeTime();
+      // sets the time on the webpage initially
+      changeTime();
+      // changes the time on the webpage every second
+      window.setInterval(changeTime, 1000);
+      // sets the weather on the webpage initially
 			getWeather();
+      // changes the weather on the webpage every minute
+      window.setInterval(getWeather, 60000);
 		</script>
 	</body>
 </html>
